@@ -35,6 +35,14 @@ export default defineConfig({
       type: "edr-simulated",
       chainType: "l1",
     },
+    // A `pnpm exec hardhat node` on 8545. scripts/local-seed.ts uses this to leave
+    // real state on a persistent chain for the frontend to read; accounts come from
+    // the node itself.
+    localhost: {
+      type: "http",
+      chainType: "l1",
+      url: "http://127.0.0.1:8545",
+    },
     // Ritual Chain testnet. Requires EIP-1559 (type-2) transactions; viem sends
     // those by default.
     ritual: {
