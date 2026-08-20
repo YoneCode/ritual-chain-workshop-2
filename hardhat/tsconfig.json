@@ -6,6 +6,11 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "types": ["node"],
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    // Hardhat runs these files through Node's type stripping, so relative imports
+    // carry the real `.ts` extension. Nothing is ever emitted; `tsc --noEmit` is
+    // used purely as a typechecker.
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   }
 }

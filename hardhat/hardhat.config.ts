@@ -12,6 +12,10 @@ export default defineConfig({
             enabled: true,
             runs: 200,
           },
+          // The precompile mocks ABI-encode/decode the 13-field HTTP call request.
+          // The legacy pipeline runs out of stack on that encoding; via-IR solves
+          // it without touching the ABI.
+          viaIR: true,
         },
       },
       production: {
@@ -21,6 +25,7 @@ export default defineConfig({
             enabled: true,
             runs: 200,
           },
+          viaIR: true,
         },
       },
     },
@@ -36,8 +41,8 @@ export default defineConfig({
       type: "http",
       chainType: "l1",
       chainId: 1979,
-      url: "https://rpc.ritualfoundation.org",
-      accounts: [configVariable("DEPLOYER_PRIVATE_KEY")],
+      url: process.env.RITUAL_RPC_URL ?? "https://rpc.ritualfoundation.org",
+      accounts: [configVariable("RITUAL_PRIVATE_KEY")],
     },
   },
 });
